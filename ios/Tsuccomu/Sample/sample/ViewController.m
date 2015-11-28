@@ -7,8 +7,7 @@
 //
 
 #import "ViewController.h"
-
-
+#import <Socket_IO_Client_Swift/Socket_IO_Client_Swift-Swift.h>
 
 @interface ViewController ()
 <SRClientHelperDelegate>
@@ -395,11 +394,11 @@
 //            [alertController dismissViewControllerAnimated:YES completion:nil];
 //        });
     }else{
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                            message:message
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+//                                                            message:message
+//                                                           delegate:nil
+//                                                  cancelButtonTitle:@"OK"
+//                                                  otherButtonTitles:nil];
         //[alertView show];
 //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3.0*NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
 //            [alertView dismissWithClickedButtonIndex:0 animated:YES];
@@ -407,5 +406,27 @@
     }
     NSLog(@"%@ - %@",title,message);
 }
+
+- (void)socketSample{
+    SocketIOClient* socket = [[SocketIOClient alloc] initWithSocketURL:@"localhost:8080" options:@{@"log": @YES, @"forcePolling": @YES}];
+    
+    [socket on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
+        NSLog(@"socket connected");
+    }];
+    
+    [socket on:@"currentAmount" callback:^(NSArray* data, SocketAckEmitter* ack) {
+        double cur = [[data objectAtIndex:0] floatValue];
+        
+        [socket emitWithAck:@"canUpdate" withItems:@[@(cur)]](0, ^(NSArray* data) {
+            [socket emit:@"update" withItems:@[@{@"amount": @(cur + 2.50)}]];
+        });
+        
+        [ack with:@[@"Got your currentAmount, ", @"dude"]];
+    }];
+    
+    [socket connect];
+}
+
+
 
 @end
