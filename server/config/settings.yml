@@ -1,0 +1,4 @@
+google_speech:
+  base_url: "https://www.google.com/speech-api/v2/recognize"
+  api_key: "AIzaSyC8_TgU0ov1unX6eBGgiD5Ej2K5pv_dqbQ"
+  file_path: "db/"
