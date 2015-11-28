@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SRClientHelper.h"
+#import "SRClientDataClasses.h"
 
 @interface ViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *buttonMic;
+
+@property (strong, nonatomic) SRClientHelper* srcHelper;
+@property (strong, nonatomic)NSMutableDictionary* settings;
+@property (assign, nonatomic)int mode;
+//@property (assign, nonatomic)
 @end
 
 typedef enum{
