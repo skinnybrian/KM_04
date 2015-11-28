@@ -47,7 +47,7 @@ bower.json
 .powenv
 
 # Ignore file
-*.csv
+# *.csv
 *.txt
 *.text
 *.wav

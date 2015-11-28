@@ -7,8 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "SRClientHelper.h"
-#import "SRClientDataClasses.h"
+
+
 
 @interface ViewController ()
 <SRClientHelperDelegate>
@@ -16,9 +16,6 @@
 
 @implementation ViewController
 {
-    SRClientHelper* _srcHelper;
-    NSMutableDictionary* _settings;
-    int _mode;
     SPEECHREC_BUTTON_MODE _latestLevel;
 }
 
@@ -28,17 +25,33 @@
     [[_buttonMic imageView] setClipsToBounds:NO];
     [[_buttonMic imageView] setContentMode:UIViewContentModeCenter];
     [self swapButtonImage:SPEECHREC_BUTTON_MODE_NONE];
-    _mode = SPEECHREC_RECOG_MODE_NONE;
-    _latestLevel = SPEECHREC_BUTTON_MODE_LEVEL_0;
+//    _mode = SPEECHREC_RECOG_MODE_NONE;
+//    _latestLevel = SPEECHREC_BUTTON_MODE_LEVEL_0;
 }
 
 - (IBAction)onButtonMic:(id)sender {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if(_mode==SPEECHREC_RECOG_MODE_NONE){
-            [self start];
-        }else{
-            [self stop];
-        }
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        if(_mode==SPEECHREC_RECOG_MODE_NONE){
+    [self start];
+            [self hoge];
+//        }else{
+//            [self stop];
+//        }
+//    });
+}
+
+
+-(void)hoge{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.5*NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+//            _mode = SPEECHREC_RECOG_MODE_NONE;
+//            _latestLevel = SPEECHREC_BUTTON_MODE_LEVEL_0;
+           if(_mode==SPEECHREC_RECOG_MODE_NONE){
+               [self start];
+           }
+           [self hoge];
+           
+        });
     });
 }
 
@@ -60,6 +73,7 @@
             serializedString = [[NSMutableString alloc]init];
             if(![nbestObj sentenceArray]||[[nbestObj sentenceArray]count]<1){
                 [serializedString appendString:@"(結果なし)"];
+                
             }else{
                 for(NSString* sentenceString in [nbestObj getNbestStringArray:YES]){
                     if([serializedString length]>0){
@@ -70,7 +84,8 @@
             }
         }
     }
-    [self showAlert:serializedString title:@"認識結果"];
+    NSLog(@"%@",serializedString);
+    //[self showAlert:serializedString title:@"認識結果"];
 }
 
 - (void)srcDidReady
@@ -88,7 +103,7 @@
     if(error){
         NSString* description = [error localizedDescription];
         NSString* reason = [error localizedFailureReason];
-        [self showAlert:reason title:description];
+        //[self showAlert:reason title:description];
     }
     [self swapButtonImage:SPEECHREC_BUTTON_MODE_NONE];
     if(_srcHelper){
@@ -376,20 +391,21 @@
                                                   style:UIAlertActionStyleDefault
                                                 handler:nil]];
         [self presentViewController:alertController animated:YES completion:nil];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3.0*NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
-            [alertController dismissViewControllerAnimated:YES completion:nil];
-        });
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3.0*NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+//            [alertController dismissViewControllerAnimated:YES completion:nil];
+//        });
     }else{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                             message:message
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
-        [alertView show];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3.0*NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
-            [alertView dismissWithClickedButtonIndex:0 animated:YES];
-        });
+        //[alertView show];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3.0*NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+//            [alertView dismissWithClickedButtonIndex:0 animated:YES];
+//        });
     }
+    NSLog(@"%@ - %@",title,message);
 }
 
 @end
