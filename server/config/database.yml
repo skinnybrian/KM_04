@@ -23,3 +23,11 @@ test:
 production:
   <<: *default
   database: db/production.sqlite3
+
+murakami:
+  <<: *default
+  database: db/murakami.sqlite3
+
+maekawa:
+  <<: *default
+  database: db/maekawa.sqlite3
