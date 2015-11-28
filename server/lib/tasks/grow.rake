@@ -5,7 +5,7 @@ namespace :grow do
   desc "文章からボケとツッコミを分別してDBに保存_origin"
   task :text_base_origin, ['filename'] => :environment do |task, args|
     
-    file_path = args.filename.to_s
+    file_path = "data/" + args.filename.to_s
     nm = Natto::MeCab.new
 
     File.open(file_path) do |file|
@@ -16,10 +16,13 @@ namespace :grow do
         nm.parse(text) do |elm|
           Plain.where_like_tsukkomi("tsukkomi_origin", elm.surface).each do |tsukkomi|
             if tsukkomi.boke_origin.nil?
+              puts text
               tsukkomi.boke_origin = text
-              tsukkomi.save
+              # tsukkomi.save
             else
-              Plain.create(tsukkomi_origin: tsukkomi, boke_origin: text)
+              puts tsukkomi
+              puts text
+              # Plain.create(tsukkomi_origin: tsukkomi, boke_origin: text)
             end
           end
         end
@@ -30,7 +33,7 @@ namespace :grow do
   desc "文章からボケとツッコミを分別してDBに保存_basic"
   task :text_base_basic, ['filename'] => :environment do |task, args|
 
-    file_path = "db/" + args.filename.to_s
+    file_path = "data/" + args.filename.to_s
     nm = Natto::MeCab.new('-F %f[6] -E \n')
 
     File.open(file_path) do |file|
@@ -80,7 +83,7 @@ namespace :grow do
       next if data["result"].empty?
       boke = data["result"][0]["alternative"][0]["transcript"]
       puts boke
-      
+
     end
   end
 end
