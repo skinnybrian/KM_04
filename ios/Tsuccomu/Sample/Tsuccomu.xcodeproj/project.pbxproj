@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2AB7FE1C1C09634D002A63B6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB7FE1B1C09634D002A63B6 /* Config.swift */; };
 		2AB7FE1F1C096379002A63B6 /* APIConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB7FE1E1C096379002A63B6 /* APIConnection.swift */; };
+		2AB7FE211C097AAF002A63B6 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AB7FE201C097AAF002A63B6 /* Home.storyboard */; };
 		6A13CF75187BFEA500DAFA8E /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A13CF74187BFEA500DAFA8E /* libicucore.dylib */; };
 		6A13CF77187BFEAD00DAFA8E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A13CF76187BFEAD00DAFA8E /* Security.framework */; };
 		6A2AF1F018C0788400D78C77 /* libSRClientHelper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2AF1ED18C0788400D78C77 /* libSRClientHelper.a */; };
@@ -53,6 +54,7 @@
 		2AB7FE1A1C09634C002A63B6 /* Tsuccomu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tsuccomu-Bridging-Header.h"; sourceTree = "<group>"; };
 		2AB7FE1B1C09634D002A63B6 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		2AB7FE1E1C096379002A63B6 /* APIConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConnection.swift; sourceTree = "<group>"; };
+		2AB7FE201C097AAF002A63B6 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		3B1CDBAD210AFA3458E3D338 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A13CF72187BFE9900DAFA8E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		6A13CF74187BFEA500DAFA8E /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				6AA10C7318041B84005ACD15 /* Main.storyboard */,
+				2AB7FE201C097AAF002A63B6 /* Home.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				6AD169EA1843560100FA3B95 /* speak_now_2.png in Resources */,
 				6AE41E7C184836030000CF91 /* speak_now_11.png in Resources */,
 				6AE41E7A184836030000CF91 /* speak_now_9.png in Resources */,
+				2AB7FE211C097AAF002A63B6 /* Home.storyboard in Resources */,
 				6AE41E7E184836030000CF91 /* speak_now_13.png in Resources */,
 				6AD169EE1843560100FA3B95 /* speak_now_6.png in Resources */,
 				6AE41E7F184836030000CF91 /* speak_now_14.png in Resources */,
