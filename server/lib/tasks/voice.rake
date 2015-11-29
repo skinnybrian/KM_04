@@ -19,7 +19,7 @@ namespace :voice do
 
   desc "get_voiceタスクをDBのツッコミの分だけ動かす"
   task :get_tsukkomi => :environment do |task, args|
-    tsukkomis = Plain.all.select(:id, :tsukkomi_origin).limit(5)
+    tsukkomis = Plain.all.select(:id, :tsukkomi_origin)#.limit(5)
     tsukkomis.each do |tsukkomi|
       puts tsukkomi.tsukkomi_origin
       file_path = Settings.voice_text.file_path + tsukkomi.id.to_s + ".wav"

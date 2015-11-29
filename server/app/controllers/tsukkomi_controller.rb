@@ -1,7 +1,7 @@
 class TsukkomiController < ApplicationController
   def tsukkomi_all
     datas = Plain.all.select(:id).order(id: :asc)
-    base_url = "http://localhost:3000/voice"
+    base_url = "http://localhost:3000/voice/"
     result_data = Array.new
     datas.each do |data|
       result_data.push(data.id.to_s + ".wav")
@@ -48,7 +48,7 @@ class TsukkomiController < ApplicationController
       }
     else # ->　見つからなかった
       random = Random.new
-      id = random.rand(0..9)
+      id = random.rand(1..9)
       boke_data = Plain.find(id)
       render json: {
         tsukkomi: boke_data.tsukkomi_origin,
