@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <Socket_IO_Client_Swift/Socket_IO_Client_Swift-Swift.h>
+#import "Tsuccomu-swift.h"
 
 @interface ViewController ()
 <SRClientHelperDelegate>
@@ -26,6 +27,7 @@
     [self swapButtonImage:SPEECHREC_BUTTON_MODE_NONE];
 //    _mode = SPEECHREC_RECOG_MODE_NONE;
 //    _latestLevel = SPEECHREC_BUTTON_MODE_LEVEL_0;
+
 }
 
 - (IBAction)onButtonMic:(id)sender {
@@ -429,6 +431,9 @@
 - (IBAction)close:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
     
+    //Sound *sound = [[Sound alloc] init];
+    //[sound playSound];
+
     
 }
 
