@@ -11,25 +11,26 @@ namespace :grow do
     return result
   end
 
-  desc "文章からボケとツッコミを分別してDBに保存_ボケを増やしていく"
-  task :text_base_boke, ['filename'] => :environment do |task, args|
-    
-    file_path = "data/" + args.filename.to_s
+#  desc "文章からボケとツッコミを分別してDBに保存_ボケを増やしていく"
+#  task :text_base_boke, ['filename'] => :environment do |task, args|
+ 
+  def text_base_boke(args)
+    puts args
+ #   file_path = "data/" + args.to_s
     nm_origin = Natto::MeCab.new
     nm_basic = Natto::MeCab.new('-F %f[6] -E \n')
     black_list = ["助詞", "助動詞", "係助詞", "副助詞", "記号", "BOS/EOS"]
     white_list = ["名詞,一般", "動詞"]
 
-    File.open(file_path) do |file|
       # 田中：どうも～、おめでとうございま～す！\n\n  ~>  どうも～、おめでとうございま～す！
-      texts = file.read.split("\n").reject(&:blank?).map { |n| n.gsub(/.*：/, "").gsub(/!|！|~|〜|\?|？/, "") }
-
+    texts = args.split(" ")
+       
       texts.each_with_index do |text, index|
-        # puts("****************")
-        # puts("元の文: #{text}")
-        # puts("****************")
-        # puts nm.parse(text)
-        # puts("****************")
+#         puts("****************")
+#         puts("元の文: #{text}")
+#         puts("****************")
+#         puts nm.parse(text)
+#         puts("****************")
 
         nm_origin.parse(text) do |elm|
 
@@ -40,7 +41,7 @@ namespace :grow do
           next if !search_list(white_list, elm.feature) || elm.surface.length < 2
 
           Plain.where_like_tsukkomi("tsukkomi_origin", elm.surface).each do |tsukkomi|
-            
+                       
             boke_origin = texts[index-1]
             tsukkomi_origin = tsukkomi.tsukkomi_origin
             boke_basic = nm_basic.parse(boke_origin)
@@ -61,15 +62,17 @@ namespace :grow do
             # )
 
 
-          end
+         # end
         end
       end
     end
   end
 
-  desc "文章からボケとツッコミを分別してDBに保存_ツッコミを増やしていく"
-  task :text_base_tsukkomi, ['filename'] => :environment do |task, args|
-    
+#  desc "文章からボケとツッコミを分別してDBに保存_ツッコミを増やしていく"
+#  task :text_base_tsukkomi, ['filename'] => :environment do |task, args|
+ 
+  def text_base_tsukkomi(args) 
+
     file_path = "data/" + args.filename.to_s
     nm_origin = Natto::MeCab.new
     nm_basic = Natto::MeCab.new('-F %f[6] -E \n')
@@ -120,7 +123,10 @@ namespace :grow do
     content_type = "audio/l16; rate=16000"
     lang = "ja"
     output = "json"
+
     file_path = Settings.google_speech.file_path + args.filename.to_s
+
+    puts file_path
 
     request_url = "#{base_url}?lang=#{lang}&output=#{output}&key=#{api_key}"
 
@@ -141,6 +147,7 @@ namespace :grow do
       next if data["result"].empty?
       boke = data["result"][0]["alternative"][0]["transcript"]
       puts boke
+    text_base_boke(boke)
 
     end
   end
