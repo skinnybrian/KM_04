@@ -10,6 +10,31 @@ class TsukkomiController < ApplicationController
   end
 
   def analysis
-    
+    xml_string = params[:xml]
+    xml = Hash.from_xml(xml_string)
+    wards = xml["Nbest"]["Sentence"]["Word"]
+    boke_temp = Array.new
+    temp = Array.new
+
+    wards.each do |ward|
+      next if ward["Label"].nil?
+      label = ward["Label"]
+      
+      # 渡されたデータがボケかどうかDBから探す
+      Plain.where_like_tsukkomi("boke_origin", label).each do |boke|
+        boke_temp.push({label: label, tsukkomi: boke})
+      end
+
+      if boke_temp.empty?
+        Plain.where_like_tsukkomi("boke_basic", label).each do |boke|
+          boke_temp.push({label: label, tsukkomi: boke})
+        end
+      end
+    end
+
+
+
+    render json: temp.push(boke_temp)
   end
+
 end
