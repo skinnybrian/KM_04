@@ -47,10 +47,13 @@ class TsukkomiController < ApplicationController
         id: boke_data.id
       }
     else # ->　見つからなかった
+      random = Random.new
+      id = random.rand(0..9)
+      boke_data = Plain.find(id)
       render json: {
-        tsukkomi: "なんでやねん",
-        voice: "999.wav",
-        id: 999
+        tsukkomi: boke_data.tsukkomi_origin,
+        voice: "#{boke_data.id.to_s}.wav",
+        id: boke_data.id
       }
     end
   end
