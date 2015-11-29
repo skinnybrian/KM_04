@@ -11,8 +11,8 @@ import AVFoundation;
 
 class Sound: NSObject {
     
-    func playSound()->Void{
-        let sound_data = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test", ofType: "wav")!)
+    func playSound(name:String,type:String)->Void{
+        let sound_data = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource(name , ofType: type)!)
         
         do{
             let audioPlayer: AVAudioPlayer = try AVAudioPlayer(contentsOfURL: sound_data)
