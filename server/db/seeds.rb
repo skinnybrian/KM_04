@@ -10,7 +10,7 @@ require "csv"
 
 nm = Natto::MeCab.new('-F %f[6] -E \n') 
 
-CSV.foreach('db/seed/seed.csv') do |row|
+CSV.foreach('db/seed/seed1.csv') do |row|
 #	puts("#{row[0]} : #{row[1]}")
 	p = Plain.new
 	if !row[0].nil?
