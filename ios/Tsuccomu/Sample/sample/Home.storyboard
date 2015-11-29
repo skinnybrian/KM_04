@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eZL-hM-ALi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nZs-54-0FU">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,22 +19,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oqe-Ei-eho">
-                                <rect key="frame" x="0.0" y="456" width="600" height="144"/>
+                                <rect key="frame" x="0.0" y="420" width="600" height="180"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZU-jH-4OX">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="144"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
                                         <animations/>
-                                        <state key="normal" title="Button"/>
                                         <connections>
-                                            <segue destination="OwR-aj-fnG" kind="presentation" id="35l-dg-EUh"/>
+                                            <segue destination="OwR-aj-fnG" kind="presentation" modalTransitionStyle="crossDissolve" id="35l-dg-EUh"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUL-ma-v9N">
-                                        <rect key="frame" x="300" y="0.0" width="300" height="144"/>
+                                        <rect key="frame" x="300" y="0.0" width="300" height="180"/>
                                         <animations/>
-                                        <state key="normal" title="Button"/>
                                         <connections>
-                                            <segue destination="TIK-2a-uyA" kind="show" id="BKr-wN-QxU"/>
+                                            <segue destination="jcm-Gm-9sJ" kind="presentation" modalTransitionStyle="crossDissolve" id="s1i-0N-nTJ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -46,15 +46,14 @@
                                     <constraint firstItem="eUL-ma-v9N" firstAttribute="height" secondItem="aZU-jH-4OX" secondAttribute="height" id="EqJ-rY-jEo"/>
                                     <constraint firstItem="eUL-ma-v9N" firstAttribute="leading" secondItem="aZU-jH-4OX" secondAttribute="trailing" id="Oq2-BN-748"/>
                                     <constraint firstItem="eUL-ma-v9N" firstAttribute="width" secondItem="aZU-jH-4OX" secondAttribute="width" id="adZ-Yn-VtQ"/>
-                                    <constraint firstAttribute="height" constant="144" id="g4S-2l-Whw"/>
+                                    <constraint firstAttribute="height" constant="180" id="g4S-2l-Whw"/>
                                     <constraint firstAttribute="bottom" secondItem="eUL-ma-v9N" secondAttribute="bottom" id="iYV-xb-2nv"/>
                                     <constraint firstItem="aZU-jH-4OX" firstAttribute="top" secondItem="Oqe-Ei-eho" secondAttribute="top" id="ktK-jP-iEv"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ghb-Gh-nai">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="456"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tsuccomi_home_fix" translatesAutoresizingMaskIntoConstraints="NO" id="ghb-Gh-nai">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                         </subviews>
                         <animations/>
@@ -65,9 +64,15 @@
                             <constraint firstItem="ghb-Gh-nai" firstAttribute="top" secondItem="V9c-Od-oE1" secondAttribute="top" id="Phr-xV-TDa"/>
                             <constraint firstAttribute="trailing" secondItem="Oqe-Ei-eho" secondAttribute="trailing" id="QoM-wt-s7s"/>
                             <constraint firstItem="ghb-Gh-nai" firstAttribute="leading" secondItem="V9c-Od-oE1" secondAttribute="leading" id="RfM-OH-lrY"/>
+                            <constraint firstItem="XYM-a1-5qC" firstAttribute="top" secondItem="ghb-Gh-nai" secondAttribute="bottom" id="b42-zK-mPD"/>
                             <constraint firstItem="Oqe-Ei-eho" firstAttribute="top" secondItem="ghb-Gh-nai" secondAttribute="bottom" id="fpA-oV-B7G"/>
                             <constraint firstItem="Oqe-Ei-eho" firstAttribute="leading" secondItem="V9c-Od-oE1" secondAttribute="leading" id="nhE-K7-9rj"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="fpA-oV-B7G"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Yhk-VM-p54"/>
                 </viewController>
@@ -83,57 +88,57 @@
             </objects>
             <point key="canvasLocation" x="2137.5" y="208"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="2v2-bt-BG0">
+        <!--Setting Controller-->
+        <scene sceneID="000-nc-oRh">
             <objects>
-                <viewController id="TIK-2a-uyA" sceneMemberID="viewController">
+                <viewController id="jcm-Gm-9sJ" customClass="SettingController" customModule="Tsuccomu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="WSy-JO-JUp"/>
-                        <viewControllerLayoutGuide type="bottom" id="sSt-JH-ipb"/>
+                        <viewControllerLayoutGuide type="top" id="i83-DL-u89"/>
+                        <viewControllerLayoutGuide type="bottom" id="1ca-aM-UbP"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Thm-hi-sOg">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                    <view key="view" contentMode="scaleToFill" id="1KP-S4-27o">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lKI-Xr-a7f">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9zj-Nc-CPU">
+                                <rect key="frame" x="0.0" y="419" width="141" height="181"/>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="181" id="g34-zN-stH"/>
+                                    <constraint firstAttribute="width" constant="141" id="rSM-78-Bgb"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="back:" destination="jcm-Gm-9sJ" eventType="touchUpInside" id="z5g-mw-eaw"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tsuccomi_settings_fix" translatesAutoresizingMaskIntoConstraints="NO" id="0MG-nd-zio">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="0MG-nd-zio" secondAttribute="height" multiplier="1:1" id="550-Nc-8UR"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lKI-Xr-a7f" firstAttribute="leading" secondItem="Thm-hi-sOg" secondAttribute="leading" id="H6J-YE-OE5"/>
-                            <constraint firstItem="lKI-Xr-a7f" firstAttribute="top" secondItem="Thm-hi-sOg" secondAttribute="top" id="Xyq-dj-P5U"/>
-                            <constraint firstItem="sSt-JH-ipb" firstAttribute="top" secondItem="lKI-Xr-a7f" secondAttribute="bottom" id="cur-EP-nyE"/>
-                            <constraint firstAttribute="trailing" secondItem="lKI-Xr-a7f" secondAttribute="trailing" id="pwi-Xk-aUT"/>
+                            <constraint firstItem="0MG-nd-zio" firstAttribute="top" secondItem="1KP-S4-27o" secondAttribute="topMargin" id="1rK-dd-9MN"/>
+                            <constraint firstItem="0MG-nd-zio" firstAttribute="leading" secondItem="1KP-S4-27o" secondAttribute="leadingMargin" constant="-20" id="4rp-S5-z2S"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0MG-nd-zio" secondAttribute="trailing" constant="-20" id="G7I-Iv-flv"/>
+                            <constraint firstItem="9zj-Nc-CPU" firstAttribute="leading" secondItem="1KP-S4-27o" secondAttribute="leadingMargin" id="G7v-IP-Pua"/>
+                            <constraint firstItem="1ca-aM-UbP" firstAttribute="top" secondItem="9zj-Nc-CPU" secondAttribute="bottom" id="v4o-6d-xsg"/>
+                            <constraint firstItem="1ca-aM-UbP" firstAttribute="top" secondItem="0MG-nd-zio" secondAttribute="bottom" id="w2e-fc-jWr"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BuS-zo-bLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="49y-M8-GcC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2098" y="819"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="gZ0-NQ-JW1">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eZL-hM-ALi" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Oz-pZ-WrS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="nZs-54-0FU" kind="relationship" relationship="rootViewController" id="k48-AQ-LKn"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="REt-ek-ywj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="512" y="419"/>
+            <point key="canvasLocation" x="2118" y="788"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tsuccomi_home_fix" width="2048" height="1536"/>
+        <image name="tsuccomi_settings_fix" width="2048" height="1536"/>
+    </resources>
 </document>
