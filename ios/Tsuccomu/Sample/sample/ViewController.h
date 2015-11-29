@@ -12,6 +12,7 @@
 
 @interface ViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *buttonMic;
+@property (weak, nonatomic) IBOutlet UILabel *tsukkomiLabel;
 
 @property (strong, nonatomic) SRClientHelper* srcHelper;
 @property (strong, nonatomic)NSMutableDictionary* settings;
