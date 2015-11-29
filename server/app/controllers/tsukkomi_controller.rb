@@ -6,7 +6,7 @@ class TsukkomiController < ApplicationController
     datas.each do |data|
       result_data.push(data.id.to_s + ".wav")
     end
-    render json: {data: result_data, base_url: base_url, count: result_data.length}
+    render json: {voice: result_data, base_url: base_url, count: result_data.length}
   end
 
   def analysis
@@ -14,7 +14,7 @@ class TsukkomiController < ApplicationController
     xml = Hash.from_xml(xml_string)
     wards = xml["Nbest"]["Sentence"]["Word"]
     
-    boke = Array.new
+    boke_array = Array.new
 
     wards.each do |ward|
       next if ward["Label"].nil?
@@ -23,19 +23,39 @@ class TsukkomiController < ApplicationController
       
       # 渡されたデータがボケかどうかDBから探す
       Plain.where_like_tsukkomi("boke_origin", label).each do |boke|
-        boke_temp.push({label: label, tsukkomi: boke})
+        boke_temp.push(boke)
       end
 
       if boke_temp.empty?
         Plain.where_like_tsukkomi("boke_basic", label).each do |boke|
-          boke_temp.push({label: label, tsukkomi: boke})
+          boke_temp.push(boke)
+        end
+      end
+
+      if !boke_temp.empty? 
+        boke_temp.each do |boke|
+          boke_array.push(boke)
         end
       end
     end
 
-
-
-    render json: boke.push(boke_temp)
+    if !boke_array.empty? # -> ボケが見つかったからツッコミを返す
+      boke_data = boke_array[0]
+      render json: {
+        tsukkomi: boke_data.tsukkomi_origin,
+        voice: "#{boke_data.id.to_s}.wav",
+        id: boke_data.id
+      }
+    else # ->　見つからなかった
+      random = Random.new
+      id = random.rand(0..9)
+      boke_data = Plain.find(id)
+      render json: {
+        tsukkomi: boke_data.tsukkomi_origin,
+        voice: "#{boke_data.id.to_s}.wav",
+        id: boke_data.id
+      }
+    end
   end
 
 end
