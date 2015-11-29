@@ -5,4 +5,4 @@ google_speech:
 
 voice_text:
   api_key: "v0n92m958evtkw4l"
-  file_path: "data/"
+  file_path: "data/voice/"
