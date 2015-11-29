@@ -9,6 +9,6 @@
 import UIKit
 
 class Config: NSObject {
-    static let baseURLString = "https://kontact.planningdev.com"
+    static let baseURLString = "http://localhost:3000"
     static let api_version = "v1"
 }

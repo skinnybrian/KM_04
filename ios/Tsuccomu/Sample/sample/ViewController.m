@@ -17,17 +17,26 @@
 @implementation ViewController
 {
     SPEECHREC_BUTTON_MODE _latestLevel;
+    
+    NSString *voice_url;
+    NSArray *array_;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    array_ = [NSArray array];
+    
     [[_buttonMic imageView] setClipsToBounds:NO];
     [[_buttonMic imageView] setContentMode:UIViewContentModeCenter];
     [self swapButtonImage:SPEECHREC_BUTTON_MODE_NONE];
 //    _mode = SPEECHREC_RECOG_MODE_NONE;
 //    _latestLevel = SPEECHREC_BUTTON_MODE_LEVEL_0;
-
+    
+    [APIConnection getVoice :^(NSArray *array, NSString* url){
+        array_ = array;
+        voice_url = url;
+    }];
 }
 
 - (IBAction)onButtonMic:(id)sender {
@@ -67,6 +76,8 @@
         if([self isResultXml]){
             if([NSMutableString stringWithString:[nbestObj serialize]]){
                 serializedString = [NSMutableString stringWithString:[nbestObj serialize]];
+
+                
             }else{
                 serializedString = [NSMutableString stringWithString:@"(結果なし)"];
             }
@@ -86,6 +97,14 @@
         }
     }
     NSLog(@"%@",serializedString);
+    [APIConnection postTsukkomi:serializedString  completionHandler:^(NSString *comment, NSString* filename){
+        
+        Sound *sound = [[Sound alloc] init];
+        [sound playSound:filename type:@"wav"];
+        
+    }];
+    
+    
     //[self showAlert:serializedString title:@"認識結果"];
 }
 
@@ -406,7 +425,7 @@
 //            [alertView dismissWithClickedButtonIndex:0 animated:YES];
 //        });
     }
-    NSLog(@"%@ - %@",title,message);
+    //NSLog(@"%@ - %@",title,message);
 }
 
 - (void)socketSample{
@@ -432,8 +451,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
     //Sound *sound = [[Sound alloc] init];
-    //[sound playSound];
-
+//    Sound *sound = [[Sound alloc] init];
+//    [sound playSound:@"test" type:@"wav"];
     
 }
 

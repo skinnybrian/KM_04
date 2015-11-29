@@ -13,12 +13,13 @@ import SwiftyJSON
 
 
 enum API: String {
-    case photo = "/photos"
-    case user_photo = "/update2"
+    case all = "/tsukkomi_all" //GET
+    case analysis = "/analysis" //POST
+    //case user_photo = "/update2"
     
     func url() -> String {
         
-        return Config.baseURLString + "/api/" + Config.api_version + self.rawValue
+        return Config.baseURLString + self.rawValue
     }
     
     
@@ -42,13 +43,42 @@ class APIConnection: NSObject {
     }
     
     
-    static func invite(information_id: String,user_id: String , completionHandler:() -> (), errorHandler: (ErrorType?,Int) -> ()) {
-        APIConnection.siteInfoWithMethod(.POST, url: "", params: ["user_id":user_id,"information_id":information_id,"device_token":""], completionHandler: { (json) -> () in
+//    static func invite(information_id: String,user_id: String , completionHandler:(Int) -> (), errorHandler: (ErrorType?,Int) -> ()) {
+//        APIConnection.siteInfoWithMethod(.POST, url: "", params: ["user_id":user_id,"information_id":information_id,"device_token":""], completionHandler: { (json) -> () in
+//            
+//            completionHandler(7)
+//            }) { (error, status) -> () in
+//                errorHandler(error,status)
+//        }
+//        
+//    }
+    
+    
+    static func postTsukkomi(xml:NSMutableString,completionHandler:(String,String) -> ()){
+        APIConnection.siteInfoWithMethod(.POST, url: "", params: ["xml":xml], completionHandler: { (json) -> () in
             
-            completionHandler()
+            completionHandler(json["tsukkomi"].stringValue,json["id"].stringValue)
             }) { (error, status) -> () in
-                errorHandler(error,status)
+                //errorHandler(status)
         }
         
     }
+    
+    static func getVoice(completionHandler:([String],String) -> ()){
+        APIConnection.siteInfoWithMethod(.GET , url: "", params: nil, completionHandler: { (json) -> () in
+            var array: [String] = []
+            
+            for file in json["voice"].arrayValue {
+                array.append(file.stringValue)
+            }
+            
+            
+            
+            completionHandler(array,json["base_url"].stringValue)
+            }) { (error, status) -> () in
+                //errorHandler(error,status)
+        }
+        
+    }
+    
 }
