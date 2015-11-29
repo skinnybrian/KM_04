@@ -98,6 +98,17 @@
     }
     NSLog(@"%@",serializedString);
     [APIConnection postTsukkomi:serializedString  completionHandler:^(NSString *comment, NSString* filename){
+       
+        self.tsukkomiLabel.text = comment;
+        self.tsukkomiLabel.hidden = NO;
+        self.caraImage.image = [UIImage imageNamed:@"tsuccomi_action_fix"];
+       
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2.5*NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+            
+            self.tsukkomiLabel.hidden = YES;
+            self.caraImage.image = [UIImage imageNamed:@"tsuccomi_wait_fix"];
+        });
+        
         
         Sound *sound = [[Sound alloc] init];
         [sound playSound:filename type:@"wav"];

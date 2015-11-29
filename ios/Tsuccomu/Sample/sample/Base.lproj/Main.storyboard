@@ -75,6 +75,7 @@
                     </view>
                     <connections>
                         <outlet property="buttonMic" destination="zXH-tV-EyC" id="GKc-ii-IZu"/>
+                        <outlet property="caraImage" destination="nqZ-Gv-5bq" id="c6y-4N-U0e"/>
                         <outlet property="tsukkomiLabel" destination="jfj-Hn-3fg" id="Rqf-dx-tf1"/>
                     </connections>
                 </viewController>
