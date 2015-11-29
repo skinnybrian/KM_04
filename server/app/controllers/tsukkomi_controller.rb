@@ -13,12 +13,13 @@ class TsukkomiController < ApplicationController
     xml_string = params[:xml]
     xml = Hash.from_xml(xml_string)
     wards = xml["Nbest"]["Sentence"]["Word"]
-    boke_temp = Array.new
-    temp = Array.new
+    
+    boke = Array.new
 
     wards.each do |ward|
       next if ward["Label"].nil?
       label = ward["Label"]
+      boke_temp = Array.new
       
       # 渡されたデータがボケかどうかDBから探す
       Plain.where_like_tsukkomi("boke_origin", label).each do |boke|
@@ -34,7 +35,7 @@ class TsukkomiController < ApplicationController
 
 
 
-    render json: temp.push(boke_temp)
+    render json: boke.push(boke_temp)
   end
 
 end
