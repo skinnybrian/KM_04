@@ -48,7 +48,7 @@ class TsukkomiController < ApplicationController
       }
     else # ->　見つからなかった
       random = Random.new
-      id = random.rand(0..9)
+      id = random.rand(1..9)
       boke_data = Plain.find(id)
       render json: {
         tsukkomi: boke_data.tsukkomi_origin,
